@@ -11,7 +11,7 @@ class GenStrings {
     let excludedFileNames = ["genstrings.swift"]
     var regularExpresions = [String:NSRegularExpression]()
 
-    let localizedRegex = "(?<=\")([^\"]*)(?=\".(localized|localizedFormat))|(?<=(Localized|NSLocalizedString)\\(\")([^\"]*?)(?=\")"
+    let localizedRegex = "(?<=\")(.*?)(?=\".(localized|localizedFormat))|(?<=(Localized|NSLocalizedString)\\(\")([^\"]*?)(?=\")"
     let commentedRegex = "(?<=.commented\\(\")([^\"]*)(?=\")"
 
     enum GenstringsError: Error {
