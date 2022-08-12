@@ -6,6 +6,8 @@
 //
 
 import Foundation
+
+#if !os(macOS)
 import UIKit
 
 // MARK: - UILabel localize Key extention for language in story board
@@ -90,3 +92,5 @@ import UIKit
         }
     }
 }
+
+#endif
