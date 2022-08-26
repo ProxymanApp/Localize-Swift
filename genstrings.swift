@@ -11,6 +11,7 @@ class GenStrings {
     let excludedFileNames = ["genstrings.swift"]
     var regularExpresions = [String:NSRegularExpression]()
 
+    // Fixed with double-quoted bug: https://github.com/marmelroy/Localize-Swift/pull/69
     let localizedRegex = "(?<=\")(.*?)(?=\".(localized|localizedFormat))|(?<=(Localized|NSLocalizedString)\\(\")([^\"]*?)(?=\")"
     let commentedRegex = "(?<=.commented\\(\")([^\"]*)(?=\")"
 
