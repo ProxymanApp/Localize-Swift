@@ -24,11 +24,21 @@ public extension String {
     func localized(using tableName: String?, in bundle: Bundle?) -> String {
         let bundle: Bundle = bundle ?? .main
         if let path = bundle.path(forResource: Localize.currentLanguage(), ofType: "lproj"),
-            let bundle = Bundle(path: path) {
-            return bundle.localizedString(forKey: self, value: nil, table: tableName)
+           let currentLanguageBundle = Bundle(path: path) {
+            let localizedString = currentLanguageBundle.localizedString(forKey: self, value: nil, table: tableName)
+
+            // Fall-back to the Base localization if the key doesn't exist
+            // https://github.com/marmelroy/Localize-Swift/pull/117
+            if localizedString == self,
+               let basePath = bundle.path(forResource: LCLBaseBundle, ofType: "lproj"),
+               let bundle = Bundle(path: basePath) {
+                return bundle.localizedString(forKey: self, value: nil, table: tableName)
+            } else {
+                return localizedString
+            }
         }
         else if let path = bundle.path(forResource: LCLBaseBundle, ofType: "lproj"),
-            let bundle = Bundle(path: path) {
+                let bundle = Bundle(path: path) {
             return bundle.localizedString(forKey: self, value: nil, table: tableName)
         }
         return self
